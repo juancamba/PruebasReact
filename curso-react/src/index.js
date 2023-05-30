@@ -6,6 +6,8 @@ import {Button} from "./Button"
 import { TaskCard } from "./Task";
 import { Saludar } from "./Saludar";
 import {Posts} from "./Posts";
+import { useState } from "react";
+import { useEffect } from "react";
 const rootElement = document.getElementById("root");
 const root = ReactDOM.createRoot(rootElement);
 
@@ -15,30 +17,36 @@ const root = ReactDOM.createRoot(rootElement);
 const handleChange = (e)=>{
   console.log(e.target.value)
   console.log(e.target.id)}
-root.render(
-  <div>
-    <TaskCard ready={false}></TaskCard>
-<Saludar></Saludar>
-<Posts></Posts>
 
+function Counter(){
 
+  const [mensaje,setMensaje] = useState('')
 
- {/*    <Button text="click me"/>
-    <Button text="pay"/>
-    <Button text="Go to"/> */}
+  const [counter,setCounter] = useState(0);
 
-    {/* <Gretings title="Hola mundo" name="juan" />
-    <Gretings title="Hola java" name="juan" />
-    <Gretings title="Hola jsx" name="juan" />
-    <UserCard
-      name="Ryan Ry"
-      amount={3000}
-      married={true}
-      points={[99, 33.3, 22.2]}
-      address={{ street: "123 calle falsa", city: "New York" }}
-    />
-    <Product />
-    <Navbar /> */}
+  useEffect(()=>{
+    console.log('useEffect executed')
+  }, [counter])
 
+  return( <div>
+     <input type="text" onChange={e=>setMensaje(e.target.value)} />
+    
+    <button onClick={()=>{
+      alert("el mensaje es: "+mensaje)
+
+    }} >Save</button>
+
+    <hr></hr>
+    <h1>Counter: {counter}</h1>
+    <button onClick={()=>setCounter(counter+1)}>Increment</button>
   </div>
-);
+  )
+}
+
+root.render(
+<>
+<Counter/>
+</>
+  );
+
+
